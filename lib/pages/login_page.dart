@@ -14,7 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final currentState = MobileVerificationState.ENTER_MOBILE_NUMBER_STATE;
+  final phoneNumberController =
+      TextEditingController(); //For taking input from the field
+  final otpController =
+      TextEditingController(); //For taking input from the field
+
+  final currentState = MobileVerificationState.ENTER_OTP_STATE;
   enterMobileNumberWidget(context) {
     return Container(
       width: double.infinity,
@@ -38,13 +43,42 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          PhoneNumber(),
+          PhoneNumber(phoneNumberController: phoneNumberController),
         ],
       ),
     );
   }
 
-  enterOTPWidget(context) {}
+  enterOTPWidget(context) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 250, left: 5, right: 5, bottom: 5),
+              child: Text(
+                'Verify Phone',
+                style: TextStyle(
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w900,
+                    fontSize: 25,
+                    fontFamily: 'RobotoMono'),
+              )),
+          Container(
+            width: 180,
+            margin: EdgeInsets.only(top: 5, bottom: 0),
+            child: Text('Code is sent to ${phoneNumberController.text}',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black54)),
+          ),
+          PhoneNumber(phoneNumberController: phoneNumberController),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
