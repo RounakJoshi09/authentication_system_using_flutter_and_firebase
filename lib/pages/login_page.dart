@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/phone_number.dart';
+import '../widgets/otp_page.dart';
 
 enum MobileVerificationState {
   ENTER_MOBILE_NUMBER_STATE,
@@ -73,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          PhoneNumber(phoneNumberController: phoneNumberController),
+          OTPPage(),
         ],
       ),
     );
@@ -83,8 +84,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentState == MobileVerificationState.ENTER_MOBILE_NUMBER_STATE
-          ? enterMobileNumberWidget(context)
-          : enterOTPWidget(context),
+          ? enterOTPWidget(context)
+          : enterMobileNumberWidget(context),
     );
   }
 }
