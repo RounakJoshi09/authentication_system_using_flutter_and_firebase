@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          PhoneNumber(),
+          MyApp(),
         ],
       ),
     );

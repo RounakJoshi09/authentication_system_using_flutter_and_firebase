@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-class PhoneNumber extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _PhoneNumberState createState() => _PhoneNumberState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _PhoneNumberState extends State<PhoneNumber> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+class _MyAppState extends State<MyApp> {
+  GlobalKey<FormState> _formKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Form(
-          key: formKey,
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: 30),
+              SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 10,
               ),
@@ -50,7 +53,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                   color: Color.fromARGB(255, 117, 0, 212),
                   textColor: Colors.white70,
                   onPressed: () {
-                    formKey.currentState?.validate();
+                    _formKey.currentState?.validate();
                   },
                 ),
               ),
