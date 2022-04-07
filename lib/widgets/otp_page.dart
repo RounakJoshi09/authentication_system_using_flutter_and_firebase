@@ -1,11 +1,34 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
 import 'package:otp_text_field/style.dart';
+import 'phone_number.dart';
+import '../global.dart' as global;
+import '../pages/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class OTPPage extends StatelessWidget {
   @override
+  final otpController = OtpFieldController();
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
   Widget build(BuildContext context) {
+    void signInWithPhoneAuthCredential(
+        PhoneAuthCredential phoneAuthCredential) async {
+      try {
+        final authCredential =
+            await _auth.signInWithCredential(phoneAuthCredential);
+
+        if (authCredential.user != null) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => HomePage()));
+        }
+      } on FirebaseAuthException catch (e) {
+        // TODO
+      }
+    }
+
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(vertical: 22, horizontal: 10),
@@ -13,6 +36,7 @@ class OTPPage extends StatelessWidget {
         children: [
           OTPTextField(
             length: 6,
+            controller: otpController,
             width: MediaQuery.of(context).size.width,
             fieldWidth: 40,
             fieldStyle: FieldStyle.box,
@@ -21,8 +45,13 @@ class OTPPage extends StatelessWidget {
               backgroundColor: Color.fromARGB(66, 14, 153, 247),
             ),
             textFieldAlignment: MainAxisAlignment.spaceAround,
-            onCompleted: (pin) {
-              print("Completed: " + pin);
+            onCompleted: (pin) async {
+              PhoneAuthCredential phoneAuthCredential =
+                  PhoneAuthProvider.credential(
+                      verificationId: global.verificationId,
+                      smsCode: otpController.toString());
+
+              signInWithPhoneAuthCredential(phoneAuthCredential);
             },
           ),
           Container(

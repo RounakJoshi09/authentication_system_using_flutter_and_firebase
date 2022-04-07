@@ -1,17 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import '../global.dart' as global;
 
 class PhoneNumber extends StatelessWidget {
   final phoneNumberController = TextEditingController();
-
   FirebaseAuth _auth = FirebaseAuth.instance;
-
   final Function changeCurrentState;
   final Function showLoadingState;
   final Function notShowLoadingState;
-
-  String verificationId = "";
   PhoneNumber(
       {required this.changeCurrentState,
       required this.showLoadingState,
@@ -53,7 +50,7 @@ class PhoneNumber extends StatelessWidget {
             textColor: Colors.white,
             onPressed: () async {
               showLoadingState();
-              await _auth.verifyPhoneNumber(
+              await (_auth).verifyPhoneNumber(
                 phoneNumber: phoneNumberController.text,
                 verificationCompleted: (PhoneAuthCredential) async {
                   notShowLoadingState();
@@ -63,7 +60,7 @@ class PhoneNumber extends StatelessWidget {
                 },
                 codeSent: (verificationId, resendingToken) async {
                   changeCurrentState();
-                  this.verificationId = verificationId;
+                  global.verificationId = verificationId;
                 },
                 codeAutoRetrievalTimeout: (verificationId) async {},
               );
