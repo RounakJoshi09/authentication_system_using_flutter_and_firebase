@@ -3,11 +3,6 @@ import '../widgets/phone_number.dart';
 import '../widgets/otp_page.dart';
 import '../global.dart' as global;
 
-enum MobileVerificationState {
-  ENTER_MOBILE_NUMBER_STATE,
-  ENTER_OTP_STATE,
-}
-
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 
@@ -15,16 +10,21 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+enum MobileVerificationState {
+  ENTER_MOBILE_NUMBER_STATE,
+  ENTER_OTP_STATE,
+}
+
 class _LoginPageState extends State<LoginPage> {
+  bool showLoading = false;
+  MobileVerificationState currentState =
+      MobileVerificationState.ENTER_MOBILE_NUMBER_STATE;
+
   final phoneNumberController =
       TextEditingController(); //For taking input from the field
   final otpController =
       TextEditingController(); //For taking input from the field
 
-  MobileVerificationState currentState =
-      MobileVerificationState.ENTER_MOBILE_NUMBER_STATE;
-
-  bool showLoading = false;
   void showLoadingState() {
     setState(() {
       showLoading = true;
@@ -102,7 +102,9 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          OTPPage(verificationId: verificationId),
+          OTPPage(
+              verificationId: verificationId,
+              changeCurrentState: changeCurrentState),
         ],
       ),
     );

@@ -7,13 +7,15 @@ import 'phone_number.dart';
 import '../global.dart' as global;
 import '../pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'resend_otp.dart';
 
 class OTPPage extends StatelessWidget {
   @override
   final otpController = OtpFieldController();
+  final Function changeCurrentState;
   FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationId = "";
-  OTPPage({required this.verificationId});
+  OTPPage({required this.verificationId, required this.changeCurrentState});
   Widget build(BuildContext context) {
     void signInWithPhoneAuthCredential(
         PhoneAuthCredential phoneAuthCredential) async {
@@ -76,6 +78,13 @@ class OTPPage extends StatelessWidget {
               onPressed: () async {},
             ),
           ),
+          Card(
+              child: Row(
+            children: [
+              Text('Didn\'t recieve code'),
+              ResendOtp(changeCurrentState: changeCurrentState),
+            ],
+          ))
         ],
       ),
     );
