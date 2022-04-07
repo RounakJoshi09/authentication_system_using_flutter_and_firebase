@@ -46,13 +46,15 @@ class OTPPage extends StatelessWidget {
               backgroundColor: Color.fromARGB(66, 14, 153, 247),
             ),
             textFieldAlignment: MainAxisAlignment.spaceAround,
+            onCompleted: (pin) async {
+              print(pin);
+              print(verificationId);
+              PhoneAuthCredential phoneAuthCredential =
+                  PhoneAuthProvider.credential(
+                      verificationId: verificationId, smsCode: pin);
 
-            // onCompleted: (pin) async {
-            //   PhoneAuthCredential phoneAuthCredential =
-            //       PhoneAuthProvider.credential(
-            //           verificationId: verificationId, smsCode: );
-
-            //},
+              signInWithPhoneAuthCredential(phoneAuthCredential);
+            },
           ),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -71,16 +73,7 @@ class OTPPage extends StatelessWidget {
               ),
               color: Color.fromARGB(255, 6, 7, 122),
               textColor: Colors.white,
-              onPressed: () async {
-                print(otpController.toString());
-                print(verificationId);
-                PhoneAuthCredential phoneAuthCredential =
-                    PhoneAuthProvider.credential(
-                        verificationId: verificationId,
-                        smsCode: otpController.toString());
-
-                signInWithPhoneAuthCredential(phoneAuthCredential);
-              },
+              onPressed: () async {},
             ),
           ),
         ],

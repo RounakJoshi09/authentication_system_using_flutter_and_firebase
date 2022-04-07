@@ -50,7 +50,7 @@ class PhoneNumber extends StatelessWidget {
             color: Color.fromARGB(255, 6, 7, 122),
             textColor: Colors.white,
             onPressed: () async {
-              //  showLoadingState();
+              showLoadingState();
               print(phoneNumberController);
               await (_auth).verifyPhoneNumber(
                 phoneNumber: '+91' + phoneNumberController.text,
