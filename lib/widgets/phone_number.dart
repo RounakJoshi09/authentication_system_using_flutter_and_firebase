@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import '../global.dart' as global;
+import 'phone_number_field.dart';
 
 class PhoneNumber extends StatelessWidget {
   //final TextEditingController phoneNumberController = TextEditingController();
@@ -17,24 +17,7 @@ class PhoneNumber extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
-          child: IntlPhoneField(
-            controller: global.phoneNumberController,
-            decoration: InputDecoration(
-              labelText: 'Phone Number',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(),
-              ),
-            ),
-            initialCountryCode: 'IN',
-            onChanged: (phone) {
-              print(phone.completeNumber);
-            },
-            onTap: () => print(global.phoneNumberController),
-            showDropdownIcon: false,
-          ),
-        ),
+        PhoneNumberField(),
         Container(
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: 8, vertical: 1),
