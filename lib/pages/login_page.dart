@@ -20,7 +20,29 @@ class _LoginPageState extends State<LoginPage> {
   final otpController =
       TextEditingController(); //For taking input from the field
 
-  final currentState = MobileVerificationState.ENTER_OTP_STATE;
+  MobileVerificationState currentState =
+      MobileVerificationState.ENTER_MOBILE_NUMBER_STATE;
+
+  bool showLoading = false;
+  void showLoadingState() {
+    setState(() {
+      showLoading = true;
+    });
+  }
+
+  void notShowLoadingState() {
+    setState(() {
+      showLoading = false;
+    });
+  }
+
+  void changeCurrentState() {
+    setState(() {
+      showLoading = false;
+      currentState = MobileVerificationState.ENTER_OTP_STATE;
+    });
+  }
+
   enterMobileNumberWidget(context) {
     return Container(
       width: double.infinity,
@@ -44,7 +66,10 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          PhoneNumber(phoneNumberController: phoneNumberController),
+          PhoneNumber(
+              changeCurrentState: changeCurrentState,
+              showLoadingState: showLoadingState,
+              notShowLoadingState: notShowLoadingState),
         ],
       ),
     );
@@ -83,9 +108,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: currentState == MobileVerificationState.ENTER_MOBILE_NUMBER_STATE
-          ? enterOTPWidget(context)
-          : enterMobileNumberWidget(context),
-    );
+        body: Container(
+      child: showLoading == true
+          ? Center(child: CircularProgressIndicator())
+          : currentState == MobileVerificationState.ENTER_MOBILE_NUMBER_STATE
+              ? enterMobileNumberWidget(context)
+              : enterOTPWidget(context),
+    ));
   }
 }

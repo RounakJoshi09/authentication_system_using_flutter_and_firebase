@@ -3,9 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class PhoneNumber extends StatelessWidget {
-  final phoneNumberController;
+  final phoneNumberController = TextEditingController();
+
   FirebaseAuth _auth = FirebaseAuth.instance;
-  PhoneNumber({this.phoneNumberController});
+
+  final Function changeCurrentState;
+  final Function showLoadingState;
+  final Function notShowLoadingState;
+
+  String verificationId = "";
+  PhoneNumber(
+      {required this.changeCurrentState,
+      required this.showLoadingState,
+      required this.notShowLoadingState});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -41,7 +51,23 @@ class PhoneNumber extends StatelessWidget {
             ),
             color: Color.fromARGB(255, 6, 7, 122),
             textColor: Colors.white,
-            onPressed: () {},
+            onPressed: () async {
+              showLoadingState();
+              await _auth.verifyPhoneNumber(
+                phoneNumber: phoneNumberController.text,
+                verificationCompleted: (PhoneAuthCredential) async {
+                  notShowLoadingState();
+                },
+                verificationFailed: (verificationFailed) async {
+                  notShowLoadingState();
+                },
+                codeSent: (verificationId, resendingToken) async {
+                  changeCurrentState();
+                  this.verificationId = verificationId;
+                },
+                codeAutoRetrievalTimeout: (verificationId) async {},
+              );
+            },
           ),
         ),
       ],
