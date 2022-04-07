@@ -4,7 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../global.dart' as global;
 
 class PhoneNumber extends StatelessWidget {
-  final phoneNumberController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final Function changeCurrentState;
   final Function showLoadingState;
@@ -31,6 +31,7 @@ class PhoneNumber extends StatelessWidget {
             onChanged: (phone) {
               print(phone.completeNumber);
             },
+            onTap: () => print(phoneNumberController),
             showDropdownIcon: false,
           ),
         ),
@@ -49,9 +50,10 @@ class PhoneNumber extends StatelessWidget {
             color: Color.fromARGB(255, 6, 7, 122),
             textColor: Colors.white,
             onPressed: () async {
-              showLoadingState();
+              //  showLoadingState();
+              print(phoneNumberController);
               await (_auth).verifyPhoneNumber(
-                phoneNumber: phoneNumberController.text,
+                phoneNumber: '+91' + phoneNumberController.text,
                 verificationCompleted: (PhoneAuthCredential) async {
                   notShowLoadingState();
                 },
@@ -59,8 +61,9 @@ class PhoneNumber extends StatelessWidget {
                   notShowLoadingState();
                 },
                 codeSent: (verificationId, resendingToken) async {
-                  changeCurrentState();
-                  global.verificationId = verificationId;
+                  // global.verificationId = verificationId;
+                  // print(global.verificationId);
+                  changeCurrentState(verificationId);
                 },
                 codeAutoRetrievalTimeout: (verificationId) async {},
               );
