@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/phone_number.dart';
 import '../widgets/otp_page.dart';
+import '../global.dart' as global;
 
 enum MobileVerificationState {
   ENTER_MOBILE_NUMBER_STATE,
@@ -97,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: 180,
             margin: EdgeInsets.only(top: 5, bottom: 0),
-            child: Text('Code is sent to ${phoneNumberController.text}',
+            child: Text('Code is sent to ${global.phoneNumberController.text}',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),

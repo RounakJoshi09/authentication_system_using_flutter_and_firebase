@@ -4,7 +4,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../global.dart' as global;
 
 class PhoneNumber extends StatelessWidget {
-  final TextEditingController phoneNumberController = TextEditingController();
+  //final TextEditingController phoneNumberController = TextEditingController();
   FirebaseAuth _auth = FirebaseAuth.instance;
   final Function changeCurrentState;
   final Function showLoadingState;
@@ -20,7 +20,7 @@ class PhoneNumber extends StatelessWidget {
         Container(
           margin: EdgeInsets.symmetric(vertical: 15, horizontal: 5),
           child: IntlPhoneField(
-            controller: phoneNumberController,
+            controller: global.phoneNumberController,
             decoration: InputDecoration(
               labelText: 'Phone Number',
               border: OutlineInputBorder(
@@ -31,7 +31,7 @@ class PhoneNumber extends StatelessWidget {
             onChanged: (phone) {
               print(phone.completeNumber);
             },
-            onTap: () => print(phoneNumberController),
+            onTap: () => print(global.phoneNumberController),
             showDropdownIcon: false,
           ),
         ),
@@ -51,9 +51,9 @@ class PhoneNumber extends StatelessWidget {
             textColor: Colors.white,
             onPressed: () async {
               showLoadingState();
-              print(phoneNumberController);
+              print(global.phoneNumberController);
               await (_auth).verifyPhoneNumber(
-                phoneNumber: '+91' + phoneNumberController.text,
+                phoneNumber: '+91' + global.phoneNumberController.text,
                 timeout: const Duration(seconds: 60),
                 verificationCompleted: (PhoneAuthCredential) async {
                   notShowLoadingState();
