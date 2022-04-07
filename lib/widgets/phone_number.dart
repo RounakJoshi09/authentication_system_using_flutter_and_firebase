@@ -1,7 +1,10 @@
+import 'package:authentication_system/widgets/continue_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../global.dart' as global;
 import 'phone_number_field.dart';
+import 'continue_button.dart';
+import 'resend_otp.dart';
 
 class PhoneNumber extends StatelessWidget {
   //final TextEditingController phoneNumberController = TextEditingController();
@@ -22,19 +25,14 @@ class PhoneNumber extends StatelessWidget {
           width: MediaQuery.of(context).size.width,
           margin: EdgeInsets.symmetric(horizontal: 8, vertical: 1),
           child: MaterialButton(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              child: Text(
-                'CONTINUE',
-                textScaleFactor: 1.5,
-                style: TextStyle(fontFamily: 'RobotoMono', color: Colors.white),
-              ),
-            ),
+            child: ContinueButton(),
             color: Color.fromARGB(255, 6, 7, 122),
-            textColor: Colors.white,
+            textColor: Color.fromRGBO(255, 255, 255, 1),
             onPressed: () async {
               showLoadingState();
+
               print(global.phoneNumberController);
+
               await (_auth).verifyPhoneNumber(
                 phoneNumber: '+91' + global.phoneNumberController.text,
                 timeout: const Duration(seconds: 30),
@@ -45,8 +43,6 @@ class PhoneNumber extends StatelessWidget {
                   notShowLoadingState();
                 },
                 codeSent: (verificationId, resendingToken) async {
-                  // global.verificationId = verificationId;
-                  // print(global.verificationId);
                   changeCurrentState(verificationId);
                 },
                 codeAutoRetrievalTimeout: (verificationId) async {},

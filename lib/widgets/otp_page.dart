@@ -15,7 +15,9 @@ class OTPPage extends StatelessWidget {
   final Function changeCurrentState;
   FirebaseAuth _auth = FirebaseAuth.instance;
   String verificationId = "";
+
   OTPPage({required this.verificationId, required this.changeCurrentState});
+
   Widget build(BuildContext context) {
     void signInWithPhoneAuthCredential(
         PhoneAuthCredential phoneAuthCredential) async {
@@ -26,8 +28,12 @@ class OTPPage extends StatelessWidget {
         if (authCredential.user != null) {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => HomePage()));
+        } else {
+          print("Incorrect OTP");
         }
       } on FirebaseAuthException catch (e) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Text(e.toString())));
         // TODO
       }
     }
@@ -81,7 +87,7 @@ class OTPPage extends StatelessWidget {
           Card(
               child: Row(
             children: [
-              Text('Didn\'t recieve code'),
+              Text('Didn\'t recieve code? '),
               ResendOtp(changeCurrentState: changeCurrentState),
             ],
           ))
