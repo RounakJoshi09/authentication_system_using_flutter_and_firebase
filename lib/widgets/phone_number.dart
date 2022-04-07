@@ -54,6 +54,7 @@ class PhoneNumber extends StatelessWidget {
               print(phoneNumberController);
               await (_auth).verifyPhoneNumber(
                 phoneNumber: '+91' + phoneNumberController.text,
+                timeout: const Duration(seconds: 60),
                 verificationCompleted: (PhoneAuthCredential) async {
                   notShowLoadingState();
                 },

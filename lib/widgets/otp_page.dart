@@ -12,7 +12,8 @@ class OTPPage extends StatelessWidget {
   @override
   final otpController = OtpFieldController();
   FirebaseAuth _auth = FirebaseAuth.instance;
-
+  String verificationId = "";
+  OTPPage({required this.verificationId});
   Widget build(BuildContext context) {
     void signInWithPhoneAuthCredential(
         PhoneAuthCredential phoneAuthCredential) async {
@@ -45,14 +46,13 @@ class OTPPage extends StatelessWidget {
               backgroundColor: Color.fromARGB(66, 14, 153, 247),
             ),
             textFieldAlignment: MainAxisAlignment.spaceAround,
-            onCompleted: (pin) async {
-              PhoneAuthCredential phoneAuthCredential =
-                  PhoneAuthProvider.credential(
-                      verificationId: global.verificationId,
-                      smsCode: otpController.toString());
 
-              signInWithPhoneAuthCredential(phoneAuthCredential);
-            },
+            // onCompleted: (pin) async {
+            //   PhoneAuthCredential phoneAuthCredential =
+            //       PhoneAuthProvider.credential(
+            //           verificationId: verificationId, smsCode: );
+
+            //},
           ),
           Container(
             width: MediaQuery.of(context).size.width,
@@ -71,7 +71,16 @@ class OTPPage extends StatelessWidget {
               ),
               color: Color.fromARGB(255, 6, 7, 122),
               textColor: Colors.white,
-              onPressed: () {},
+              onPressed: () async {
+                print(otpController.toString());
+                print(verificationId);
+                PhoneAuthCredential phoneAuthCredential =
+                    PhoneAuthProvider.credential(
+                        verificationId: verificationId,
+                        smsCode: otpController.toString());
+
+                signInWithPhoneAuthCredential(phoneAuthCredential);
+              },
             ),
           ),
         ],

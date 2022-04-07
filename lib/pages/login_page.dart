@@ -36,7 +36,9 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void changeCurrentState() {
+  String verificationId = "";
+  void changeCurrentState(String verificationId) {
+    this.verificationId = verificationId;
     setState(() {
       showLoading = false;
       currentState = MobileVerificationState.ENTER_OTP_STATE;
@@ -99,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
           ),
-          OTPPage(),
+          OTPPage(verificationId: verificationId),
         ],
       ),
     );
