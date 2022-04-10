@@ -8,12 +8,10 @@ class ContinueButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-      child: Text(
-        'CONTINUE',
-        textScaleFactor: 1.5,
-        style: TextStyle(
-            fontFamily: 'RobotoMono', color: Color.fromRGBO(255, 255, 255, 1)),
-      ),
+      child: Text('CONTINUE',
+          textScaleFactor: 1.5,
+          style: GoogleFonts.montserrat(
+              color: Colors.white, fontWeight: FontWeight.w500)),
     );
   }
 }

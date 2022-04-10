@@ -55,17 +55,17 @@ class _LoginPageState extends State<LoginPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
+              padding: EdgeInsets.only(bottom: 5),
               margin: EdgeInsets.only(top: 250, left: 5, right: 5, bottom: 2),
-              child: Text(
-                'Please Enter Your Mobile Number',
-                style: TextStyle(
+              child: Text('Please Enter Your Mobile Number',
+                  style: GoogleFonts.roboto(
                     color: Colors.black87,
                     fontWeight: FontWeight.w900,
                     fontSize: 20,
-                    fontFamily: 'RobotoMono'),
-              )),
+                  ))),
           Container(
             width: 180,
+            padding: EdgeInsets.only(bottom: 15),
             child: Text('You\'ll receive a 6 digit code to verify next',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54)),
@@ -90,11 +90,11 @@ class _LoginPageState extends State<LoginPage> {
               margin: EdgeInsets.only(top: 250, left: 5, right: 5, bottom: 5),
               child: Text(
                 'Verify Phone',
-                style: TextStyle(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 25,
-                    fontFamily: 'RobotoMono'),
+                style: GoogleFonts.roboto(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 25,
+                ),
               )),
           Container(
             width: 180,

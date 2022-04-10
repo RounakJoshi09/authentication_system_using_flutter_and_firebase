@@ -66,18 +66,24 @@ class OTPPage extends StatelessWidget {
             },
           ),
           Container(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Didn\'t recieve code? '),
+              ResendOtp(changeCurrentState: changeCurrentState),
+            ],
+          )),
+          Container(
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.symmetric(horizontal: 8, vertical: 1),
             child: MaterialButton(
               child: Container(
                 margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                 child: Text(
-                  'VERIFY',
+                  'VERIFY & CONTINUE',
                   textScaleFactor: 1.5,
-                  style: TextStyle(
-                    fontFamily: 'RobotoMono',
-                    color: Colors.white,
-                  ),
+                  style: GoogleFonts.montserrat(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
               color: Color.fromRGBO(46, 59, 98, 1),
@@ -85,13 +91,6 @@ class OTPPage extends StatelessWidget {
               onPressed: () async {},
             ),
           ),
-          Card(
-              child: Row(
-            children: [
-              Text('Didn\'t recieve code? '),
-              ResendOtp(changeCurrentState: changeCurrentState),
-            ],
-          ))
         ],
       ),
     );
