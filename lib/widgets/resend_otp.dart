@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../global.dart' as global;
+import 'package:google_fonts/google_fonts.dart';
 
 class ResendOtp extends StatelessWidget {
   FirebaseAuth _auth = FirebaseAuth.instance;

@@ -8,6 +8,7 @@ import '../global.dart' as global;
 import '../pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'resend_otp.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class OTPPage extends StatelessWidget {
   @override
@@ -79,7 +80,7 @@ class OTPPage extends StatelessWidget {
                   ),
                 ),
               ),
-              color: Color.fromARGB(255, 6, 7, 122),
+              color: Color.fromRGBO(46, 59, 98, 1),
               textColor: Colors.white,
               onPressed: () async {},
             ),

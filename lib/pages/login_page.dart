@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/phone_number.dart';
 import '../widgets/otp_page.dart';
 import '../global.dart' as global;
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);

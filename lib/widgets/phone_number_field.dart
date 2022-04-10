@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../global.dart' as global;
+import 'package:google_fonts/google_fonts.dart';
 
 class PhoneNumberField extends StatelessWidget {
   const PhoneNumberField({Key? key}) : super(key: key);

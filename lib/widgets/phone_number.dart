@@ -26,8 +26,8 @@ class PhoneNumber extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 8, vertical: 1),
           child: MaterialButton(
             child: ContinueButton(),
-            color: Color.fromARGB(255, 6, 7, 122),
-            textColor: Color.fromRGBO(255, 255, 255, 1),
+            color: Color.fromRGBO(46, 59, 98, 1),
+            textColor: Colors.white,
             onPressed: () async {
               showLoadingState();
 
