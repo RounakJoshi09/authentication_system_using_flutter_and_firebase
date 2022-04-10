@@ -13,7 +13,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-      child: Text('Home Page'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 300),
+            child: Text('Please Select Your Profile',
+                style: GoogleFonts.roboto(
+                    color: Colors.black, fontWeight: FontWeight.w500)),
+          )
+        ],
+      ),
     ));
   }
 }
